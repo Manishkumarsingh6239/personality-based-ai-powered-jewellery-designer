@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/personality-based-ai-powered-jewellery-designer/static/css/main.cc9f7dc4.css",
-    "main.js": "/personality-based-ai-powered-jewellery-designer/static/js/main.7921f784.js",
-    "index.html": "/personality-based-ai-powered-jewellery-designer/index.html",
-    "main.cc9f7dc4.css.map": "/personality-based-ai-powered-jewellery-designer/static/css/main.cc9f7dc4.css.map",
-    "main.7921f784.js.map": "/personality-based-ai-powered-jewellery-designer/static/js/main.7921f784.js.map"
+    "main.css": "./static/css/main.cc9f7dc4.css",
+    "main.js": "./static/js/main.5d9c3686.js",
+    "index.html": "./index.html",
+    "main.cc9f7dc4.css.map": "./static/css/main.cc9f7dc4.css.map",
+    "main.5d9c3686.js.map": "./static/js/main.5d9c3686.js.map"
   },
   "entrypoints": [
     "static/css/main.cc9f7dc4.css",
-    "static/js/main.7921f784.js"
+    "static/js/main.5d9c3686.js"
   ]
 }

@@ -1,0 +1,632 @@
+// prjct.scss
+
+// Variables
+$primary-color: #8b5e3c; // Earthy gold tone
+$secondary-color: #d4af37; // Metallic gold
+$accent-color: #a67c52; // Rose gold
+$text-color: #333;
+$light-bg: #f9f5f0;
+$dark-bg: #2c2c2c;
+$border-radius: 8px;
+$box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+$transition: all 0.3s ease;
+
+// Base Styles
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: $text-color;
+}
+
+.title {
+  text-align: center;
+  color: $primary-color;
+  margin-bottom: 2rem;
+  font-size: 2.2rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  position: relative;
+  padding-bottom: 1rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, $secondary-color, transparent);
+  }
+}
+
+// Question Box
+.question-box {
+  background-color: $light-bg;
+  padding: 2rem;
+  border-radius: $border-radius;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba($primary-color, 0.2);
+}
+
+.question {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: darken($primary-color, 10%);
+  font-weight: 500;
+  text-align: center;
+}
+
+// Input Styles
+.text-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba($primary-color, 0.3);
+  border-radius: $border-radius;
+  font-size: 1rem;
+  transition: $transition;
+  background-color: white;
+
+  &:focus {
+    outline: none;
+    border-color: $secondary-color;
+    box-shadow: 0 0 0 2px rgba($secondary-color, 0.2);
+  }
+}
+
+// Button Styles
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.option-button, .generate-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: $border-radius;
+  background-color: $primary-color;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: $transition;
+  min-width: 120px;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background-color: lighten($primary-color, 20%);
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.option-button {
+  background-color: white;
+  color: $primary-color;
+  border: 1px solid $primary-color;
+
+  &:hover {
+    background-color: $light-bg;
+  }
+}
+
+.generate-button {
+  display: block;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  background: linear-gradient(to right, $primary-color, $accent-color);
+  box-shadow: 0 4px 10px rgba($primary-color, 0.3);
+}
+
+// Image Container
+.image-container {
+  margin-top: 2rem;
+  text-align: center;
+  padding: 1.5rem;
+  background-color: $light-bg;
+  border-radius: $border-radius;
+  border: 1px dashed rgba($primary-color, 0.3);
+}
+
+.jewelry-image {
+  max-width: 100%;
+  max-height: 500px;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  object-fit: contain;
+  background-color: white;
+  padding: 1rem;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-weight: 500;
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .question-box {
+    padding: 1.5rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .option-button {
+    width: 100%;
+  }
+}
+
+// Loading Animation
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.generate-button:disabled {
+  animation: pulse 1.5s infinite;
+}
+// Landing Page Styles
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.landing-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+  background: linear-gradient(135deg, rgba($primary-color, 0.1) 0%, rgba($secondary-color, 0.05) 100%);
+  border-radius: $border-radius;
+
+  h1 {
+    font-size: 3rem;
+    color: $primary-color;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: lighten($text-color, 20%);
+  }
+}
+
+.landing-nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba($primary-color, 0.1);
+
+  button {
+    padding: 0.8rem 2rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: $text-color;
+    cursor: pointer;
+    position: relative;
+    transition: $transition;
+
+    &:hover {
+      color: $primary-color;
+    }
+
+    &.active {
+      color: $primary-color;
+      font-weight: 500;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $primary-color;
+      }
+    }
+  }
+}
+
+.landing-main {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+// About Section
+.about-section {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+
+  h2 {
+    color: $primary-color;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: lighten($text-color, 10%);
+  }
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.feature-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  transition: $transition;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  h3 {
+    color: $primary-color;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: lighten($text-color, 20%);
+  }
+}
+
+.start-button {
+  background: linear-gradient(to right, $primary-color, $accent-color);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: $transition;
+  margin-top: 2rem;
+  box-shadow: 0 4px 15px rgba($primary-color, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($primary-color, 0.4);
+  }
+}
+
+// Auth Section
+.auth-section {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.login-form, .signup-form {
+  background: white;
+  padding: 2rem;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+
+  h2 {
+    color: $primary-color;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba($primary-color, 0.2);
+    border-radius: $border-radius;
+    font-size: 1rem;
+    transition: $transition;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+    }
+  }
+}
+
+.auth-button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: $border-radius;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+// Developers Section
+.developers-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+
+  h2 {
+    color: $primary-color;
+    margin-bottom: 2rem;
+  }
+}
+
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.member-card {
+  background: white;
+  padding: 2rem;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  transition: $transition;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  h3 {
+    color: $primary-color;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p {
+    color: lighten($text-color, 20%);
+    font-size: 0.9rem;
+    line-height: 1.5;
+
+    &:last-child {
+      margin-top: 1rem;
+      font-style: italic;
+    }
+  }
+  >svg{
+    margin: 5px;
+    height: 10%;
+    width: 10%;
+  }
+  >a{
+    margin: 5px;
+    text-decoration: none;
+    color: $primary-color;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    display: inline-block;
+    transition: $transition;
+    height: 10%;
+    width: 10%;
+    &:hover {
+      color: $secondary-color;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.member-avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  background-color: rgba($primary-color, 0.1);
+  color: $primary-color;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+
+  >img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+}
+
+// Footer
+.landing-footer {
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 3rem;
+  color: lighten($text-color, 30%);
+  font-size: 0.9rem;
+  border-top: 1px solid rgba($primary-color, 0.1);
+}
+/********************************
+ * GLOBAL VARIABLES
+ ********************************/
+ $primary-color: #8b5e3c;
+ $secondary-color: #d4af37;
+ $accent-color: #a67c52;
+ $text-color: #333;
+ $light-bg: #f9f5f0;
+ $dark-bg: #2c2c2c;
+ $border-radius: 8px;
+ $box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+ $transition: all 0.3s ease;
+ 
+ /********************************
+  * BASE STYLES
+  ********************************/
+ body {
+   font-family: 'Helvetica Neue', Arial, sans-serif;
+   color: $text-color;
+   margin: 0;
+   padding: 0;
+   background-color: $light-bg;
+ }
+ 
+ /********************************
+  * DESIGNER PAGE STYLES
+  ********************************/
+ .container {
+   max-width: 800px;
+   margin: 2rem auto;
+   padding: 2rem;
+   background-color: white;
+   border-radius: $border-radius;
+   box-shadow: $box-shadow;
+   position: relative;
+ 
+   .designer-header {
+     margin-bottom: 2rem;
+     text-align: center;
+     position: relative;
+ 
+     .back-button {
+       position: absolute;
+       left: 0;
+       top: 50%;
+       transform: translateY(-50%);
+       background: none;
+       border: none;
+       color: $primary-color;
+       font-size: 1rem;
+       cursor: pointer;
+       padding: 0.5rem 1rem;
+       border-radius: $border-radius;
+       transition: $transition;
+       display: flex;
+       align-items: center;
+ 
+       &:hover {
+         background-color: rgba($primary-color, 0.1);
+       }
+     }
+ 
+     .title {
+       margin: 0 auto;
+     }
+   }
+ 
+   // ... rest of your existing designer styles
+ }
+ 
+ /********************************
+  * LANDING PAGE STYLES
+  ********************************/
+ .landing-container {
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 2rem;
+   min-height: 100vh;
+ 
+   .landing-header {
+     text-align: center;
+     margin-bottom: 3rem;
+     padding: 2rem 0;
+     background: linear-gradient(135deg, rgba($primary-color, 0.1) 0%, rgba($secondary-color, 0.05) 100%);
+     border-radius: $border-radius;
+ 
+     h1 {
+       font-size: 2.5rem;
+       color: $primary-color;
+       margin-bottom: 0.5rem;
+     }
+   }
+ 
+   .start-button {
+     background: linear-gradient(to right, $primary-color, $accent-color);
+     color: white;
+     border: none;
+     padding: 1rem 2rem;
+     font-size: 1.1rem;
+     border-radius: 50px;
+     cursor: pointer;
+     margin-top: 2rem;
+     transition: $transition;
+ 
+     &:hover {
+       transform: translateY(-2px);
+       box-shadow: 0 4px 15px rgba($primary-color, 0.2);
+     }
+   }
+ 
+   // ... rest of your landing page styles
+ }
+ 
+ /********************************
+  * RESPONSIVE STYLES
+  ********************************/
+ @media (max-width: 768px) {
+   .container {
+     padding: 1rem;
+     margin: 1rem;
+ 
+     .designer-header {
+       .back-button {
+         position: static;
+         transform: none;
+         margin-bottom: 1rem;
+         justify-content: center;
+       }
+     }
+   }
+ }
+ 

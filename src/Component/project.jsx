@@ -65,8 +65,8 @@ const GeminiComponent = () => {
         .map(([key, value]) => `${key}: ${value}`)
         .join(", ");
 
-      const query = `Generate a high-quality photorealistic jewelry image (e.g necklace, ring) suitable for a person with these personality traits: ${personalityDescription}.`;
-
+      const query = `Generate A high-resolution, professional photo of the jewelry. The jewelry should be the focal point, highly detailed, and beautifully lit with soft lighting to highlight its brilliance. The background should be smoothly blurred (bokeh effect) in a neutral or complementary color, creating a luxurious and elegant aesthetic. For male(extrovert) bracelet and male(ambivert/introvert) ring and for female you choose randomly necklace or Mangtika or pair of ear rings. Studio lighting, 8K, ultra-realistic, photorealistic style, with these personality traits: ${personalityDescription} `;
+      console.log(query);
       const response = await fetch("https://api.aimlapi.com/v1/images/generations", {
         method: "POST",
         headers: {

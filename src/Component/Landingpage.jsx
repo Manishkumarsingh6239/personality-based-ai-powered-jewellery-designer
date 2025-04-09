@@ -333,7 +333,7 @@ const LandingPage = () => {
           <section className="team-section">
             <div className="section-header">
               <h1>Our Team</h1>
-              <p>The minds behind Gemini's innovative technology</p>
+              <p>The minds behind AI Personalized Jewelry Designer's innovative technology</p>
             </div>
 
             <div className="team-grid">
@@ -441,7 +441,7 @@ const LandingPage = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} Gemini Jewellery Design. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} AI Personalized Jewelry Designer. All rights reserved.</p>
         </div>
       </footer>
     </div>

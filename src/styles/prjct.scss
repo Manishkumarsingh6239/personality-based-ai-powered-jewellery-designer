@@ -679,6 +679,7 @@ button {
     .auth-tabs {
       display: flex;
       flex-direction: column;
+      justify-content: space-evenly;
       gap: 1.5rem;
 
       .auth-tab {
@@ -711,7 +712,7 @@ button {
           }
 
           input {
-            width: 100%;
+            width: 85%;
             padding: 0.8rem;
             border: 1px solid #e6ecf2;
             border-radius: 4px;

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/prjct.scss";
-import { MdHome,MdAccountBox } from "react-icons/md";
+import { MdHome, MdAccountBox } from "react-icons/md";
 import { SiXdadevelopers } from "react-icons/si";
-import { FaGithub,FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 const LandingPage = () => {
   const [activeTab, setActiveTab] = useState("about");
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
@@ -19,7 +19,16 @@ const LandingPage = () => {
     const { name, value } = e.target;
     setSignupForm(prev => ({ ...prev, [name]: value }));
   };
-  
+
+  const closeSidebar = () => {
+    const sidebar = document.querySelector(".main-sidebar-nav");
+    sidebar.style.display = "none";
+  }
+  const showSidebar = () => {
+    const sidebar = document.querySelector(".main-sidebar-nav");
+    sidebar.style.display = "block";
+  }
+
 
   // Sample jewelry designs for showcase
   const jewelryDesigns = [
@@ -46,13 +55,37 @@ const LandingPage = () => {
 
   return (
     <div className="landing-container">
-      {/* Professional Navigation */}
+      /* Professional Navigation */
       <nav className="main-nav">
         <div className="nav-brand">
           <span>AI Personalized Jewelry Designer</span>
         </div>
         <div className="nav-menu">
-          <button 
+          <button
+            className={activeTab === "about" ? "nav-link active hideOnMobile" : "nav-link hideOnMobile"}
+            onClick={() => setActiveTab("about")}
+          >
+            <MdHome />
+          </button>
+          <button
+            className={activeTab === "auth" ? "nav-link active hideOnMobile" : "nav-link hideOnMobile"}
+            onClick={() => setActiveTab("auth")}
+          >
+            <MdAccountBox />
+          </button>
+          <button
+            className={activeTab === "developers" ? "nav-link active hideOnMobile" : "nav-link hideOnMobile"}
+            onClick={() => setActiveTab("developers")}
+          >
+            <SiXdadevelopers />
+          </button>
+          <svg onClick={showSidebar} className="menu-button" xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#d1d7de"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" /></svg>
+        </div>
+      </nav>
+      <nav className="main-sidebar-nav" style={{ display: "none" }}>
+        <div className="nav-menu">
+          <svg onClick={closeSidebar} xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#d1d7de"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg>
+          <button
             className={activeTab === "about" ? "nav-link active" : "nav-link"}
             onClick={() => setActiveTab("about")}
           >
@@ -76,14 +109,14 @@ const LandingPage = () => {
       <main className="landing-main">
         {activeTab === "about" && (
           <>
-            {/* 1. Hero Section */}
+            {/* 1. Hero Section */}}
             <section className="hero-section">
               <div className="hero-content">
                 <h1>Create Your Unique AI-Powered Jewelry in Seconds!</h1>
                 <h2>Answer a few questions, and our AI will craft a stunning, personalized jewelry design just for you.</h2>
-                
+
                 <div className="cta-group">
-                  <button 
+                  <button
                     className="primary-btn"
                     onClick={() => navigate('/design')}
                   >Try It
@@ -93,7 +126,7 @@ const LandingPage = () => {
                   </button>
                 </div>
               </div>
-              
+
               <div className="hero-image">
                 <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f" alt="AI-generated jewelry" />
               </div>
@@ -119,12 +152,12 @@ const LandingPage = () => {
                   <p>Download, share, or order the physical jewelry</p>
                 </div>
               </div>
-              
+
               <div className="demo-cta">
-              <button 
-                    className="primary-btn"
-                    onClick={() => navigate('/design')}
-                  >
+                <button
+                  className="primary-btn"
+                  onClick={() => navigate('/design')}
+                >
                   Try Now
                 </button>
               </div>
@@ -134,7 +167,7 @@ const LandingPage = () => {
             <section className="showcase-section">
               <h2>AI-Generated Jewelry Designs</h2>
               <p>See what our technology can create</p>
-              
+
               <div className="design-grid">
                 {jewelryDesigns.map(design => (
                   <div className="design-card" key={design.id}>
@@ -152,7 +185,7 @@ const LandingPage = () => {
 
             {/* 4. Benefits Section */}
             <section className="benefits-section">
-              <h2>Why Choose Gemini</h2>
+              <h2>Why Choose Our Platform</h2>
               <div className="benefits-grid">
                 <div className="benefit-card">
                   <h3>100% Unique Designs</h3>
@@ -189,7 +222,7 @@ const LandingPage = () => {
                   </div>
                 ))}
               </div>
-              
+
               <div className="press-logos">
                 <p>As featured in:</p>
                 <div className="logos">
@@ -251,11 +284,11 @@ const LandingPage = () => {
                     </button>
                   </form>
                 </div>
-                
+
                 <div className="auth-divider">
                   <span>or</span>
                 </div>
-                
+
                 <div className={`auth-tab ${signupForm.email ? 'active' : ''}`}>
                   <h2>Create Account</h2>
                   <form>
@@ -302,7 +335,7 @@ const LandingPage = () => {
               <h1>Our Team</h1>
               <p>The minds behind Gemini's innovative technology</p>
             </div>
-            
+
             <div className="team-grid">
               <div className="team-card">
                 <div className="member-photo">
@@ -313,10 +346,10 @@ const LandingPage = () => {
                   <p>12304562</p>
                   <div className="social-links">
                     <a href="https://github.com/Manishkumarsingh6239" target="_blank" rel="noopener noreferrer">
-                    <FaGithub />
+                      <FaGithub />
                     </a>
                     <a href="https://www.linkedin.com/in/manish2004/" target="_blank" rel="noopener noreferrer">
-                    <FaLinkedin />
+                      <FaLinkedin />
                     </a>
                   </div>
                 </div>
@@ -330,10 +363,10 @@ const LandingPage = () => {
                   <p>12314947</p>
                   <div className="social-links">
                     <a href="https://github.com/Aditya7005446231" target="_blank" rel="noopener noreferrer">
-                    <FaGithub />
+                      <FaGithub />
                     </a>
                     <a href="https://www.linkedin.com/in/aditya-rai-31a250289/" target="_blank" rel="noopener noreferrer">
-                    <FaLinkedin />
+                      <FaLinkedin />
                     </a>
                   </div>
                 </div>
@@ -347,15 +380,15 @@ const LandingPage = () => {
                   <p>12319291</p>
                   <div className="social-links">
                     <a href="https://github.com/singhaman5" target="_blank" rel="noopener noreferrer">
-                    <FaGithub />
+                      <FaGithub />
                     </a>
                     <a href="https://www.linkedin.com/in/amansingh2310?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
-                    <FaLinkedin />
+                      <FaLinkedin />
                     </a>
                   </div>
                 </div>
               </div>
-              
+
               {/* Repeat for other team members */}
             </div>
           </section>
@@ -365,31 +398,37 @@ const LandingPage = () => {
       <footer className="main-footer">
         <div className="footer-content">
           <div className="footer-brand">
-            <span>Gemini</span>
+            <span>Ai Personalised Jewellery Designer</span>
             <p>AI-Powered Jewelry Design</p>
           </div>
-          
+
           <div className="footer-links">
             <div className="link-group">
               <h4>Company</h4>
-              <a href="#">About</a>
-              <a href="#">Careers</a>
-              <a href="#">Press</a>
+              <div className="link-group-a">
+                <a href="#">About</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+              </div>
             </div>
             <div className="link-group">
               <h4>Resources</h4>
-              <a href="#">Blog</a>
-              <a href="#">Help Center</a>
-              <a href="#">Tutorials</a>
+              <div className="link-group-a">
+                <a href="#">Blog</a>
+                <a href="#">Help Center</a>
+                <a href="#">Tutorials</a>
+              </div>
             </div>
             <div className="link-group">
               <h4>Legal</h4>
-              <a href="#">Privacy</a>
-              <a href="#">Terms</a>
-              <a href="#">Cookie Policy</a>
+              <div className="link-group-a">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Cookie Policy</a>
+              </div>
             </div>
           </div>
-          
+
           <div className="footer-newsletter">
             <h4>Stay Updated</h4>
             <div className="newsletter-form">
@@ -400,7 +439,7 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="footer-bottom">
           <p>© {new Date().getFullYear()} Gemini Jewellery Design. All rights reserved.</p>
         </div>

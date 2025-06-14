@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/prjct.scss";
+import Model from "../Component/model";
 
 const GeminiComponent = () => {
   const [step, setStep] = useState(0);
   const [personality, setPersonality] = useState({});
-  const [response, setResponse] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState("");
+  const [showImage, setShowImage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const questions = [
     { question: "What is Gender?", key: "gender", options: ["Male", "Female", "Transgender"] },
@@ -53,57 +57,23 @@ const GeminiComponent = () => {
       setStep(step + 1);
     } else {
       setStep(questions.length);
+      let personalityDescription = Object.entries({ ...personality, [key]: answer })
+        .map(([k, v]) => `${k}: ${v}`)
+        .join(", ");
+      const prompt = `Generate A high-resolution, professional photo of the jewelry. The jewelry should be the focal point, highly detailed, and beautifully lit with soft lighting to highlight its brilliance. The background should be smoothly blurred (bokeh effect) in a neutral or complementary color, creating a luxurious and elegant aesthetic. For male(extrovert) bracelet and male(ambivert/introvert) ring and for female you choose randomly necklace or Mangtika or pair of ear rings. Studio lighting, 8K, ultra-realistic, photorealistic style, with these personality traits: ${personalityDescription}`;
+      setQuery(prompt);
+      setShowImage(false);
+      setIsLoading(false);
     }
   };
 
-  const handleGenerate = async () => {
-    setLoading(true);
-    setResponse("");
+  const handleGenerateImage = () => {
+    setShowImage(true);
+    setIsLoading(true);
+  };
 
-    try {
-      let personalityDescription = Object.entries(personality)
-        .map(([key, value]) => `${key}: ${value}`)
-        .join(", ");
-
-      const query = `Generate A high-resolution, professional photo of the jewelry. The jewelry should be the focal point, highly detailed, and beautifully lit with soft lighting to highlight its brilliance. The background should be smoothly blurred (bokeh effect) in a neutral or complementary color, creating a luxurious and elegant aesthetic. For male(extrovert) bracelet and male(ambivert/introvert) ring and for female you choose randomly necklace or Mangtika or pair of ear rings. Studio lighting, 8K, ultra-realistic, photorealistic style, with these personality traits: ${personalityDescription} `;
-      console.log(query);
-      const response = await fetch("https://api.aimlapi.com/v1/images/generations", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer 240881d3feda4cbea8d30bebddd724b0`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: "flux-pro",
-          image_size: {
-            width: 1024,
-            height: 1024
-          },
-          num_inference_steps: 30,
-          guidance_scale: 7.5,
-          safety_tolerance: "1",
-          output_format: "jpeg",
-          prompt: query,
-          num_images: 1,
-          seed: 42
-        })
-      });
-
-      const data = await response.json();
-      const imageUrl = data?.images?.[0]?.url;
-      console.log(response);
-      console.log(data);
-      if (imageUrl) {
-        setResponse(imageUrl);
-      } else {
-        setResponse("No image generated. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error generating image:", error);
-      setResponse("Error: Could not generate image. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+  const handleImageLoaded = () => {
+    setIsLoading(false);
   };
 
   return (
@@ -128,20 +98,23 @@ const GeminiComponent = () => {
           </div>
         </div>
       ) : (
-        <>
-          <button onClick={handleGenerate} disabled={loading} className="generate-button">
-            {loading ? "Generating..." : "Generate Jewellery Image"}
-          </button>
-          {response && (
-            <div className="image-container">
-              {response.startsWith("http") ? (
-                <img src={response} alt="Generated Jewelry" className="jewelry-image" />
-              ) : (
-                <p className="error-message">{response}</p>
-              )}
-            </div>
+        <div>
+          {!showImage ? (
+            <>
+              <button className="generate-button" onClick={handleGenerateImage}>
+                Generate Image
+              </button>
+            </>
+          ) : (
+            <>
+              {isLoading && <p style={{textAlign: "center"}}>Generating image...</p>}
+              <Model query={query} onLoad={handleImageLoaded} />
+              <button className="center-home-btn" onClick={() => navigate("/")}>
+                Go to Home Page
+              </button>
+            </>
           )}
-        </>
+        </div>
       )}
     </div>
   );

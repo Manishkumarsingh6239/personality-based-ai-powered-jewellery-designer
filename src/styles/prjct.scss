@@ -1131,6 +1131,19 @@ button {
   }
 }
 
+
+.jewelry-image {
+  max-width: 550px;
+  max-height: 500px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.center-home-btn {
+  display: block;
+  margin: 24px auto 0 auto; /* top margin for spacing, auto for horizontal centering */
+}
 // Large Desktop Breakpoint
 @media (min-width: 1024px) {
   .hero-section {
